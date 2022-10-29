@@ -7,20 +7,31 @@
 using namespace std;
 class profile
 {   
-    //static int count;                                      //to count number of id's already made
-    public: 
-        // static int count;                                      //to count number of id's already made
-        char fullName[30];
-        char email[30];
-        char password[30];
-        char userName[30];  
-        char mobileNo[30];
-        char secQue[30];
-        char secAns[30];
+//     int employee_ID;    
+//     static int no_of_employees;                                      //to count number of id's already made
+    public:
+        // int employee_ID;
+        // static int no_of_employees;                                      //to count number of id's already made
+        string fullName;
+        string email;
+        string password;
+        string userName;  
+        string mobileNo;
+        string secQue;
+        string secAns;
     
         // profile()
         // {
-        //     count++;
+        //      (this->employee_ID) = ++ (this->no_of_employees);
+        //         // employee_ID ++;
+        // }
+        // ~profile()
+        // {
+        //     --(this->no_of_employees);
+        // }
+        // int getEmployeeID(void)
+        // {
+        //         return this->employee_ID;
         // }
 };
 
@@ -31,7 +42,7 @@ class profile
 // }
 
 
-// void getusername(char input[30],struct data user,FILE *datafile)
+// void getusername(char input[30],profile &object,FILE *datafile)
 // {   
 //     datafile = fopen("Users.html","r+");
 //     if( access( "C:\\Users\\Admin\\Desktop\\Users.html", F_OK ) == 0)
@@ -40,9 +51,9 @@ class profile
 //         char usernamecheck2[30];
 //         getinput(usernamecheck);
 
-//         while(fread(&user, sizeof(struct data), 1, datafile)){
+//         while(fread(&object, sizeof(object), 1, datafile)){
             
-//             if(!strcmp(user.userName,usernamecheck))
+//             if(!strcmp(object.userName,usernamecheck))
 //             {   
 //                 printf("\033[0;31m");
 //                 printf("The username is already taken\n");
@@ -98,10 +109,10 @@ int main()
                 profile user;
                 ofstream file_obj;                                                  // Object to write in file
 
-                //int number_of_ids = user.count;
-                //string filename = "User" + to_string(user.count);
+                //int number_of_ids = user.getEmployeeID();
+                // string filename = "User" + to_string(number_of_ids) + ".txt";
 
-                file_obj.open("User.txt", ios::app);
+                // file_obj.open(filename, ios::app);
 
                 // printf("Enter your full name:\n");
                 // getinput(user.fullName);
@@ -119,20 +130,24 @@ int main()
                 // getinput(user.secAns);
 
                 printf("Enter your full name:\n");
-                cin>>user.fullName;
+                getline(cin,user.fullName);
+
+                string filename = "User_" + user.fullName;
+                file_obj.open(filename, ios::app);
+
                 printf("Please enter your username:\n");
                 //getusername(user.userName,user,datafile);
-                cin>>user.userName;
+                getline(cin,user.userName);
                 printf("Please enter your email:\n");
-                cin>>user.email;
+                getline(cin,user.email);
                 printf("Please enter your mobile no.:\n");
-                cin>>user.mobileNo;
+                getline(cin,user.mobileNo);
                 printf("Please enter your password:\n");
-                cin>>user.password;
+                getline(cin,user.password);
                 printf("Enter the security question:\n");
-                cin>>user.secQue;
+                getline(cin,user.secQue);
                 printf("Enter the answer to security question:\n");
-                cin>>user.secAns;
+                getline(cin,user.secAns);
 
                 system("cls");
                 printf("Creating Account.......please wait\n");
