@@ -190,7 +190,7 @@ int main()
 
                         //profile user2;
                         // fstream file_obje;
-                        
+                        int a;
                         strcat(nouse,username2);
 
                         // string demostr = to_string(username2);
