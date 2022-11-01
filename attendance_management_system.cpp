@@ -85,6 +85,8 @@ int main()
 {
      int selection;
 
+    static int user_no;
+
     FILE *datafile;
     FILE *userfile;
     fstream file_obj; 
@@ -98,6 +100,11 @@ int main()
     char username3[30];
     char username4[30];
     char secAns2[30];
+
+
+        do{
+
+
     cout<<"\t\t\t****Login System***\n";
     cout<<"Choose your option from below:\n";
     cout<<"1.Signup\n";
@@ -125,8 +132,10 @@ int main()
                         //getusername(user.userName,user,datafile);
                         getinput(user.userName);
 
+                        user_no++;
+
                         userfile = fopen("Users.txt","a+");
-                        fprintf(userfile, "%s %s" ,"User:",user.userName);
+                        fprintf(userfile, "%s %d %s %s \n" ,"User",user_no," : ",user.userName);
                         fclose(userfile);
 
                         //const char* demo = user.userName.c_str();
@@ -320,4 +329,5 @@ int main()
                         // }
                 return 0;
         }
+        }while(selection != 5);
 }
