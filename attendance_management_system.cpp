@@ -21,7 +21,7 @@ class profile
         char secAns[30];
     
         // profile()
-        // {
+        // { 
         //      (this->employee_ID) = ++ (this->no_of_employees);
         //         // employee_ID ++;
         // }
@@ -86,6 +86,7 @@ int main()
      int selection;
 
     FILE *datafile;
+    FILE *userfile;
     fstream file_obj; 
 
     profile user;
@@ -117,14 +118,19 @@ int main()
                         //profile user;
                         // ofstream file_obj;                                                  // Object to write in file
 
+
                         printf("Enter your full name:\n");
                         getinput(user.fullName);
                         printf("Please enter your username:\n");
                         //getusername(user.userName,user,datafile);
                         getinput(user.userName);
 
+                        userfile = fopen("Users.txt","a+");
+                        fprintf(userfile, "%s %s" ,"User:",user.userName);
+                        fclose(userfile);
+
                         //const char* demo = user.userName.c_str();
-                        //string defaultstr = to_string(user.userName);                             //to convert const char to string
+                        //string defaultstr = to_string(user.userName);                        //to convert const char to string
                         // char nouse[30] = "User_";
                         strcat(nouse,user.userName);
                         // string filename = "User_" + defaultstr;
@@ -189,6 +195,7 @@ int main()
                         // }
                         // else{
                         datafile = fopen(nouse,"r");
+                
                         while(fread(&user, sizeof(user), 1, datafile))
                         {
                         if(!strcmp(user.userName,username2)){
