@@ -102,7 +102,7 @@ int main()
     char secAns2[30];
 
 
-        do{
+    do{
 
 
     cout<<"\t\t\t****Login System***\n";
