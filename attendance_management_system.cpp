@@ -102,7 +102,7 @@ int main()
     char secAns2[30];
 
 
-    do{
+    //do{
 
 
     cout<<"\t\t\t****Login System***\n";
@@ -190,7 +190,7 @@ int main()
 
                         //profile user2;
                         // fstream file_obje;
-                        
+
                         strcat(nouse,username2);
 
                         // string demostr = to_string(username2);
@@ -329,5 +329,5 @@ int main()
                         // }
                 return 0;
         }
-        }while(selection != 5);
+       // }while(selection != 5);
 }
