@@ -4,6 +4,8 @@
 #include<fstream>                                               //to add ostream class template
 #include<windows.h>
 #include<unistd.h>
+#include <ctime>
+#include <sstream> 
 using namespace std;
 class profile
 {   
@@ -33,6 +35,19 @@ class profile
         // {
         //         return this->employee_ID;
         // }
+};
+
+class dates
+{
+        public:
+        int date;
+        int month;
+        int year;
+        int hr;
+        int min;
+        int sec;
+        char day[30];
+        char am_pm[30];
 };
 
 void getinput(char input[30])
@@ -82,8 +97,17 @@ void getinput(char input[30])
 // };
 
 int main()
-{
-     int selection;
+{   
+    time_t ttime = time(0);
+    tm *local_time = localtime(&ttime);
+
+    int date = local_time->tm_mday;
+    int month = 1 + local_time->tm_mon;
+    int hour = 1 + local_time->tm_hour;
+    int min = 1 + local_time->tm_min;
+
+
+    int selection;
 
     static int user_no;
 
@@ -93,25 +117,30 @@ int main()
 
     profile user;
 
+//     time_t ttime = time(0);
+//     tm *local_time = localtime(&ttime);
+
     char nouse[30] = "User_";
     char username2[30];
     char password2[30];
     char password3[30];
     char username3[30];
     char username4[30];
+    char username5[30];
     char secAns2[30];
 
 
-    do{
+    //do{
 
 
-    cout<<"\t\t\t****Login System***\n";
+    cout<<"\t\t\t***Login System**\n";
     cout<<"Choose your option from below:\n";
     cout<<"1.Signup\n";
     cout<<"2.Login\n";
     cout<<"3.Logout\n";
     cout<<"4.Forgot Password\n";
-    cout<<"5.Exit\n";
+    cout<<"5.Admin Login\n";
+    cout<<"6.Exit\n";
     cout<<"Enter the serial number of your choice:\n";
     cin>>selection;
     fgetc(stdin);
@@ -119,7 +148,7 @@ int main()
         switch(selection){
                 case 1:
                         system("cls");
-                        printf("\t\t\t***Signup Portal***\n");
+                        printf("\t\t\t**Signup Portal**\n");
                         printf("Please enter the required information:\n");
 
                         //profile user;
@@ -179,8 +208,11 @@ int main()
 
 
                 case 2:   
+                        // time_t ttime = time(0);
+                        // tm *local_time = localtime(&ttime);
+
                         system("cls");
-                        printf("\t\t\t***Login Portal***\n");   
+                        printf("\t\t\t**Login Portal**\n");   
                         printf("Enter your username:\n");
                         getinput(username2);
                         printf("Enter your password:\n");
@@ -190,8 +222,39 @@ int main()
 
                         //profile user2;
                         // fstream file_obje;
-                        
+
                         strcat(nouse,username2);
+
+                        // int date = local_time->tm_mday;
+                        // int month = 1 + local_time->tm_mon;
+                        // int hour = 1 + local_time->tm_hour;
+                        // int min = 1 + local_time->tm_min;
+
+                        {stringstream stream;
+
+                        stream << date;
+                        string str_date;
+                        stream >> str_date;
+
+                        stream << month;
+                        string str_month;
+                        stream >> str_month;
+
+                        stream << hour;
+                        string str_hour;
+                        stream >> str_hour;
+
+                        stream << min;
+                        string str_min;
+                        stream >> str_min;                        
+
+                        string object_name = str_date +" " + str_month + " " + str_hour + " " + str_min;
+                        }
+                        dates object_name;
+
+
+
+
 
                         // string demostr = to_string(username2);
                         // string filename2 = "User_" + demostr;
@@ -214,13 +277,21 @@ int main()
                                 printf("Successful login at %s\n\n",user.fullName);
                                 printf("\033[0m");
 
-                                printf("Your profile data is:\n");
-                                printf("Full Name       : %s\n",user.fullName);
-                                printf("Email           : %s\n",user.email);
-                                printf("Username        : %s\n",user.userName);
-                                printf("Contact details : %s\n",user.mobileNo);
-                                printf("Password        : %s\n",user.password);
+                                fclose(datafile);
+
+                                file_obj.open(nouse, ios::app);
                                 
+                                object_name.date = date;
+                                object_name.month = month;
+                                object_name.year =  1900 + local_time->tm_year ;
+                                object_name.hr = 1 + local_time->tm_hour;
+                                object_name.min = 1 + local_time->tm_min;
+                                object_name.sec = 1 + local_time->tm_sec;
+                                //object_name.day = 1 + local_time->tm_sec;
+
+
+
+                                file_obj.write((char*)&object_name, sizeof(object_name));
                                 }
                                 else
                                 {   
@@ -237,13 +308,13 @@ int main()
                                 printf("\033[0m");
                         }
                         }
-                        fclose(datafile);
+                        //fclose(datafile);
                         //}
                         break;
 
                 case 3: 
                         system("cls");        
-                        printf("\t\t\t***Logout Portal***\n");
+                        printf("\t\t\t**Logout Portal**\n");
                         
                         printf("Enter your username:\n");
                         getinput(username4);
@@ -285,7 +356,7 @@ int main()
 
                 case 4: 
                         system("cls");
-                        printf("\t\t\t***Password retrieval Portal***\n");
+                        printf("\t\t\t**Password retrieval Portal**\n");
                         
                         printf("Enter your username:\n");
                         getinput(username3);
@@ -326,8 +397,18 @@ int main()
 
                         fclose(datafile);
                         break;
+
+                case 5: 
+                        printf("\t\t\t**Admin Login Portal**\n");
+                        cout<<"Enter username :"<<endl;
+                        getinput(username5);
+
+                        
+
+
+
                         // }
                 return 0;
         }
-        }while(selection != 5);
+       // }while(selection != 5);
 }
