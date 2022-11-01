@@ -411,8 +411,4 @@ int main()
                 return 0;
         }
        // }while(selection != 5);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a8d1bbdcad30499676cde91e70420c20bc126dd4
