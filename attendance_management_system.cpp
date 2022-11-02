@@ -56,6 +56,43 @@ void getinput(char input[30])
     input[strlen(input) - 1] = 0;
 }
 
+string get_date(int x)
+{
+        string ddaattee;
+        switch (x)
+        {
+       case 1:    
+        ddaattee =  "one ";    
+        break;    
+        case 2:    
+        ddaattee =  "two ";    
+        break;    
+        case 3:    
+        ddaattee =  "three ";  
+        break;    
+        case 4:    
+        ddaattee =  "four ";  
+        break;    
+        case 5:    
+        ddaattee =  "five ";  
+        break;    
+        case 6:    
+        ddaattee =  "six ";   
+        break;    
+        case 7:  
+        ddaattee =  "seven ";  
+        break;  
+        case 8:    
+        ddaattee =  "eight ";    
+        break;    
+        case 9:    
+        ddaattee =  "nine ";  
+        break;  
+
+        }
+        return ddaattee;
+}
+
 
 // void getusername(char input[30],profile &object,FILE *datafile)
 // {   
@@ -106,14 +143,17 @@ int main()
     int hour = 1 + local_time->tm_hour;
     int min = 1 + local_time->tm_min;
 
+    string faltu;
+    string nameofObject;
 
     int selection;
 
     static int user_no;
+    static int object_no;
 
     FILE *datafile;
     FILE *userfile;
-    fstream file_obj; 
+    //fstream file_obj; 
 
     profile user;
 
@@ -172,7 +212,8 @@ int main()
                         // char nouse[30] = "User_";
                         strcat(nouse,user.userName);
                         // string filename = "User_" + defaultstr;
-                        file_obj.open(nouse, ios::app);
+                       { ofstream file1;
+                        file1.open(nouse, ios::app);
 
                         printf("Please enter your email:\n");
                         getinput(user.email);
@@ -191,13 +232,15 @@ int main()
                         //datafile = fopen("Users.html","a+");
                         // fwrite(&user, sizeof(), 1, datafile);
 
-                        file_obj.write((char*)&user, sizeof(user));
-
+                        file1.write((char*)&user, sizeof(user));
+                        file1.close();
+                        }
                         if(fwrite != 0){
                         printf("\033[0;32m");
                         cout<<"Your account has been created."<<endl;
                         cout<<"Your username is : "<<user.userName<<endl;
                         printf("\033[0m");
+                        
                         }
                         else
                         {
@@ -225,36 +268,52 @@ int main()
 
                         strcat(nouse,username2);
 
-                        // int date = local_time->tm_mday;
+                        //int date = local_time->tm_mday;
                         // int month = 1 + local_time->tm_mon;
                         // int hour = 1 + local_time->tm_hour;
                         // int min = 1 + local_time->tm_min;
 
-                        {stringstream stream;
+                        // {stringstream stream;
 
-                        stream << date;
-                        string str_date;
-                        stream >> str_date;
+                        // stream << date;
+                        // string str_date;
+                        // stream >> str_date;
 
-                        stream << month;
-                        string str_month;
-                        stream >> str_month;
+                        // stream << month;
+                        // string str_month;
+                        // stream >> str_month;
 
-                        stream << hour;
-                        string str_hour;
-                        stream >> str_hour;
+                        // stream << hour;
+                        // string str_hour;
+                        // stream >> str_hour;
 
-                        stream << min;
-                        string str_min;
-                        stream >> str_min;                        
+                        // stream << min;
+                        // string str_min;
+                        // stream >> str_min;                        
 
-                        string object_name = str_date +" " + str_month + " " + str_hour + " " + str_min;
-                        }
-                        dates object_name;
+                        // string object_name = str_date +" " + str_month + " " + str_hour + " " + str_min;
+                        // }
+                        // dates object_name;
+                        //{
+                        //char dateString[30] = to_string(date);
+                        
+                
+                        // string temp_str=to_string(date);                                   //converting number to a string
 
+                        // faltu = nouse + temp_str;
+                        // char const* date_array= faltu.c_str();                     //converting string to char Array
 
+                        // strcat(faltu,date_array);
+                        
+                        // // cout<<"enter object name :";
 
+                        faltu = get_date(date);
+                        cout<<faltu;
 
+                        dates faltu;
+
+                       // }
+                        //object_no++;
 
                         // string demostr = to_string(username2);
                         // string filename2 = "User_" + demostr;
@@ -279,19 +338,22 @@ int main()
 
                                 fclose(datafile);
 
-                                file_obj.open(nouse, ios::app);
+                                ofstream file3;
+                                file3.open(nouse, ios::app);
                                 
-                                object_name.date = date;
-                                object_name.month = month;
-                                object_name.year =  1900 + local_time->tm_year ;
-                                object_name.hr = 1 + local_time->tm_hour;
-                                object_name.min = 1 + local_time->tm_min;
-                                object_name.sec = 1 + local_time->tm_sec;
+                                faltu.date = local_time->tm_mday;
+                                faltu.month = 1 + local_time->tm_mon;
+                                faltu.year =  1900 + local_time->tm_year ;
+                                faltu.hr = 1 + local_time->tm_hour;
+                                faltu.min = 1 + local_time->tm_min;
+                                faltu.sec = 1 + local_time->tm_sec;
                                 //object_name.day = 1 + local_time->tm_sec;
 
+                                cout<<"Date : "<<faltu.year;
+                                cout<<"Month : "<<"11";
 
-
-                                file_obj.write((char*)&object_name, sizeof(object_name));
+                                file3.write((char*)&faltu, sizeof(faltu));
+                                file3.close();
                                 }
                                 else
                                 {   
@@ -402,8 +464,33 @@ int main()
                         printf("\t\t\t**Admin Login Portal**\n");
                         cout<<"Enter username :"<<endl;
                         getinput(username5);
+                        cout<<"Enter date :"<<endl;
+                        string date_input;
+                        cin>>date_input;
+
+                        strcat(nouse,username5);
+
+                        ifstream file2;
+                        file2.open(nouse,ios::in);
+
+                        // datafile = fopen(nouse,"r");
+
+                        nameofObject = "User_" + date_input;
+
+                        dates nameofObject;
+                        
+                        while(file2.read( (char*)&nameofObject, sizeof(nameofObject) ))
+                        {
 
                         
+
+                        cout<<"login hr : "<<nameofObject.hr;
+
+                        
+                        }
+
+
+
 
 
 
